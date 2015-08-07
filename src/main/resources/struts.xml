@@ -10,17 +10,41 @@
 
     <!--suppress Struts2ModelInspection -->
     <package name="default" namespace="/" extends="struts-default">
-        <action name="emp-list" class="com.ztx.qa.actions.EmployeeAction" method="list">
-            <result name="list">/WEB-INF/list/emp-list.jsp</result>
-        </action>
 
-        <action name="emp-delete" class="employeeAction" method="deleteById">
-            <result name="success">/WEB-INF/helloworld.jsp</result>
-        </action>
+        <interceptors>
+            <interceptor-stack name="sshStack">
+                <!--suppress Struts2ModelInspection -->
+                <interceptor-ref name="paramsPrepareParamsStack">
+                    <!--suppress Struts2ModelInspection -->
+                    <param name="prepare.alwaysInvokePrepare">false</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <!--suppress CheckTagEmptyBody -->
+        <default-interceptor-ref name="sshStack"></default-interceptor-ref>
 
         <action name="hello" class="com.ztx.qa.HelloWorld" method="hello">
-            <result name="helloworld">/WEB-INF/helloworld.jsp</result>
+            <result name="helloworld">/WEB-INF/view/helloworld.jsp</result>
+        </action>
+
+        <action name="emp-list" class="com.ztx.qa.actions.EmployeeAction" method="list">
+            <result name="list">/WEB-INF/view/emp-list.jsp</result>
+        </action>
+
+        <action name="emp-delete" class="com.ztx.qa.actions.EmployeeAction" method="deleteById">
+            <!--suppress Struts2ModelInspection -->
+            <result name="success" type="redirect">emp-list</result>
+        </action>
+
+        <action name="emp-input" class="com.ztx.qa.actions.EmployeeAction" method="input">
+            <result name="input">/WEB-INF/view/emp-input.jsp</result>
+        </action>
+
+        <action name="emp-save" class="com.ztx.qa.actions.EmployeeAction" method="save">
+            <!--suppress Struts2ModelInspection -->
+            <result name="success" type="redirect">emp-list</result>
         </action>
     </package>
-    
+
 </struts>

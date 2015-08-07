@@ -30,4 +30,12 @@ public class EmployeeDao {
         Employee employee = entityManager.find(Employee.class, id);
         entityManager.remove(employee);
     }
+
+    public void saveOrUpdate(Employee employee) {
+        entityManager.merge(employee);
+    }
+
+    public Employee get(Integer id) {
+        return entityManager.find(Employee.class, id);
+    }
 }

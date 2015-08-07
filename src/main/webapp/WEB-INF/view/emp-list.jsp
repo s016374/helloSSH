@@ -12,6 +12,7 @@
     <title>list</title>
 </head>
 <body>
+<s:debug/>
 <h3>employee list</h3>
 <s:if test="#employee.id == null">
     No result.
@@ -20,6 +21,7 @@
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <td>ID</td>
+            <td>LastName</td>
             <td>Birth</td>
             <td>CreateTime</td>
             <td>email</td>
@@ -30,8 +32,11 @@
         <s:iterator value="employeeList" var="employee">
             <tr>
                 <td><s:property value="#employee.id" /></td>
-                <td><s:property value="#employee.birth" /></td>
-                <td><s:property value="#employee.createTime" /></td>
+                <td><s:property value="#employee.lastName" /></td>
+                <%--<td><s:property value="#employee.birth" /></td>--%>
+                <td><s:date name="#employee.birth" format="yyyy-MM-dd"></s:date> </td>
+                <%--<td><s:property value="#employee.createTime" /></td>--%>
+                <td><s:date name="#employee.createTime" format="yyyy-MM-dd hh:mm:ss"/> </td>
                 <td><s:property value="#employee.email" /></td>
                 <td><s:property value="#employee.department.departmentName" /></td>
                 <td><a href="emp-delete.action?id=${employee.id}">delete</a></td>

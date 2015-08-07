@@ -7,10 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Date;
@@ -19,34 +16,34 @@ import java.util.Date;
  * Created by s016374 on 15/8/3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class DepartmentTest {
-//    private ApplicationContext applicationContext;
-//    private EntityManagerFactory entityManagerFactory;
-    @PersistenceContext
+    private ApplicationContext applicationContext;
+    private EntityManagerFactory entityManagerFactory;
+//    @PersistenceContext
     private EntityManager entityManager;
-//    private EntityTransaction entityTransaction;
+    private EntityTransaction entityTransaction;
 
     @org.junit.Before
     public void setUp() throws Exception {
-//        applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
-//        entityManagerFactory = (EntityManagerFactory) applicationContext.getBean("entityManagerFactory");
-//        entityManager=entityManagerFactory.createEntityManager();
-//        entityTransaction = entityManager.getTransaction();
-//        entityTransaction.begin();
+        applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        entityManagerFactory = (EntityManagerFactory) applicationContext.getBean("entityManagerFactory");
+        entityManager=entityManagerFactory.createEntityManager();
+        entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
     }
 
     @org.junit.After
     public void tearDown() throws Exception {
-//        entityTransaction.commit();
-//        entityManager.close();
-//        entityManagerFactory.close();
+        entityTransaction.commit();
+        entityManager.close();
+        entityManagerFactory.close();
     }
 
     @Test
     public void test() throws SQLException {
-//        DataSource dataSource = applicationContext.getBean(DataSource.class);
-//        System.out.println(dataSource.getConnection());
+        DataSource dataSource = applicationContext.getBean(DataSource.class);
+        System.out.println(dataSource.getConnection());
         System.out.println(entityManager);
     }
 
@@ -90,5 +87,16 @@ public class DepartmentTest {
     public void testDeleteById() {
         String jpql = "delete from Employee e where e.id = ?";
         entityManager.createQuery(jpql).setParameter(1, 3).executeUpdate();
+    }
+
+    @Test
+    public void testMerge() {
+        Employee employee = new Employee();
+        employee.setBirth(null);
+        employee.setCreateTime(null);
+        employee.setLastName("aa");
+        employee.setEmail("mm");
+        employee.setId(13);
+        entityManager.merge(employee);
     }
 }
