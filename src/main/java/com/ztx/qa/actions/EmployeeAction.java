@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by s016374 on 15/8/4.
  */
 @Controller
-public class EmployeeAction extends ActionSupport implements RequestAware, ModelDriven<Employee>, Preparable{
+public class EmployeeAction extends ActionSupport implements RequestAware, ModelDriven<Employee>, Preparable {
     private static final long serialVersionUID = 1L;
 
     @Autowired
@@ -32,7 +32,6 @@ public class EmployeeAction extends ActionSupport implements RequestAware, Model
     private Map<String, Object> request;
     private Employee model;
 
-
     public String list() {
         employeeList = employeeService.getAll();
         return "list";
@@ -43,26 +42,33 @@ public class EmployeeAction extends ActionSupport implements RequestAware, Model
         return SUCCESS;
     }
 
-    public String input() {
+    public String inputInfo() {
         request.put("departments", departmentService.getAll());
         return INPUT;
     }
 
     public void prepareInput() {
-        if(id != null){
+        if (id != null) {
             model = employeeService.get(id);
         }
     }
 
-    public String save(){
+    public String save() {
 
-       System.out.println(model.getLastName());
+        System.out.println(model.getDepartment());
 
         employeeService.saveOrUpdate(model);
 
         return SUCCESS;
     }
 
+    public void prepareSave() {
+        if (id == null) {
+            model = new Employee();
+        } else {
+            model = employeeService.get(id);
+        }
+    }
 
     public EmployeeService getEmployeeService() {
         return employeeService;
@@ -109,9 +115,6 @@ public class EmployeeAction extends ActionSupport implements RequestAware, Model
     }
 
     public Employee getModel() {
-        if(id == null){
-            model = new Employee();
-        }
         return model;
     }
 

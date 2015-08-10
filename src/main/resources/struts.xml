@@ -37,7 +37,7 @@
             <result name="success" type="redirect">emp-list</result>
         </action>
 
-        <action name="emp-input" class="com.ztx.qa.actions.EmployeeAction" method="input">
+        <action name="emp-input" class="com.ztx.qa.actions.EmployeeAction" method="inputInfo">
             <result name="input">/WEB-INF/view/emp-input.jsp</result>
         </action>
 

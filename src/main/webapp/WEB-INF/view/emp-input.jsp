@@ -17,9 +17,10 @@
 
 <s:form action="emp-save" method="POST">
   <s:textfield name="lastName" label="Last Name"></s:textfield>
-  <s:textfield name="mail" label="Email"></s:textfield>
+  <s:textfield name="email" label="Email"></s:textfield>
   <s:textfield name="birth" label="BirthDay"></s:textfield>
-  <s:select list="#request.departments" listvalue="departmentName" listkey="id" name="department.id" label="Department"></s:select>
+  <%--<s:select list="#request.departments" listKey="id" listValue="departmentName" name="department.id" label="Department"></s:select>--%>
+  <s:select list="#request.departments" label="Department" name="department.id"></s:select>
   <%--<s:select list="#{1:'aa',2:'bb',3:'cc'}"  label="abc" listKey="key" listValue="value"  headerKey="0" headerValue="aabb"/>--%>
   <s:submit></s:submit>
 </s:form>

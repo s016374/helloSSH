@@ -24,13 +24,8 @@
     <table name="department" schema="" catalog="autotest" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="departmentName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="deptName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="manager_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="FK_pwsg2i9mf3et4f3fi0w5up61m" columns="manager_id" ref-table="manager" ref-schema="" ref-catalog="autotest" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="FK_lk0a412kck2kdc6slousi528s" table="employee" schema="" catalog="autotest" columns="department_id"/>
-      <index name="UK_pwsg2i9mf3et4f3fi0w5up61m" unique="true" columns="manager_id"/>
-      <index name="FK_pwsg2i9mf3et4f3fi0w5up61m" unique="false" columns="manager_id"/>
     </table>
     <table name="employee" schema="" catalog="autotest" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -111,7 +106,6 @@
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="mgrName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="FK_pwsg2i9mf3et4f3fi0w5up61m" table="department" schema="" catalog="autotest" columns="manager_id"/>
     </table>
     <table name="news" schema="" catalog="autotest" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
