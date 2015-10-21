@@ -1,7 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
-<p>Struts2</p>
+<h2>SSH application to be test</h2>
 <a href="hello.action">hello world</a>
 <hr>
 <a href="emp-list.action">Employee list</a>
